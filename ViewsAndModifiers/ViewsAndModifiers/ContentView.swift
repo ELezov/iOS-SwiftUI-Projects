@@ -9,9 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Color.blue
-            .frame(width: 300, height: 200)
-            .watermarked(with: "Hacking with Swift")
+        VStack {
+            Text("Hello").prominent()
+            Color.blue
+                .frame(width: 300, height: 200)
+                .watermarked(with: "Hacking with Swift")
+        }
+        
     }
 }
 
@@ -33,6 +37,20 @@ struct Watermark: ViewModifier {
 extension View {
     func watermarked(with text: String) -> some View {
         modifier(Watermark(text: text))
+    }
+}
+
+struct ProminentTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.blue)
+    }
+}
+
+extension View {
+    func prominent() -> some View {
+        modifier(ProminentTitle())
     }
 }
 
