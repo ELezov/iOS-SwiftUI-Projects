@@ -8,22 +8,38 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var useRedText = false
-    
     var body: some View {
-        Button("Hello World") {
-            // flip the Boolean between true and false
-            useRedText.toggle()
+            VStack(spacing: 10) {
+                CapsuleText(text: "First")
+                    .foregroundColor(.white)
+                CapsuleText(text: "Second")
+                    .foregroundColor(.red)
+                Text("Hello World")
+                    .modifier(Title())
+            }
         }
-        .foregroundColor(useRedText ? .red : .blue)
-        VStack {
-            Text("Gryffindor")
-                .blur(radius: 0)
-            Text("Hufflepuff")
-            Text("Ravenclaw")
-            Text("Slytherin")
-        }
-        .blur(radius: 5)
+}
+
+struct CapsuleText: View {
+    var text: String
+
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .padding()
+            .background(.blue)
+            .clipShape(Capsule())
+    }
+}
+
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 
